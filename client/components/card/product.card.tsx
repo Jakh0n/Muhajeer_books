@@ -99,7 +99,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 					</NoSSR>
 				</div>
 
-				<p className='text-xs text-muted-foreground line-clamp-2'>
+				<p className='text-xs text-muted-foreground line-clamp-2 whitespace-pre-line'>
 					{product.description || 'No description available'}
 				</p>
 			</div>

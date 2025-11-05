@@ -14,34 +14,29 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://flami.org/'),
-	title: "FLAMI | Koreyada eng arzon kitoblar do'koni",
+	metadataBase: new URL('https://muhajeerbooks.com/'),
+	title: "Muhajeer Books | O'zbek, rus va ingliz tillaridagi kitoblar do'koni",
 	description:
-		"Koreyada yashovchi o'zbeklar uchun eng arzon va eng yangi kitoblarni taklif qilamiz. O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling.",
-	authors: [
-		{
-			name: 'Jakhon Yokubov',
-			url: 'https://flami.org',
-		},
-	],
-	icons: { icon: '/image.png' },
+		"O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling va yetkazib berishni taklif qilamiz.",
+	icons: { icon: '/muhajeer_logo.jpg' },
 	openGraph: {
-		title: "FLAMI | Koreyada eng arzon kitoblar do'koni",
+		title:
+			"Muhajeer Books | O'zbek, rus va ingliz tillaridagi kitoblar do'koni",
 		description:
-			"Koreyada yashovchi o'zbeklar uchun eng arzon va eng yangi kitoblarni taklif qilamiz. O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling.",
+			"O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling va yetkazib berishni taklif qilamiz.",
 		type: 'website',
-		url: 'https://flami.org',
+		url: 'https://muhajeerbooks.com',
 		locale: 'kr-KR',
-		images: '/image.png',
+		images: '/muhajeer_logo.jpg',
 		countryName: 'Korea',
-		siteName: 'FLAMI',
-		emails: 'info@flami.org',
+		siteName: 'Muhajeer Books',
+		emails: 'muhajeerbooks@gmail.com',
 	},
 	keywords: [
 		'kitob dukoni Koreyada',
 		'Koreyada kitob sotish',
 		"Koreyada o'zbek kitoblari",
-		'FLAMI',
+		'Muhajeer Books',
 		'Muqaddima',
 		"Koreyada kitob do'koni",
 		'arzon kitoblar Koreyada',

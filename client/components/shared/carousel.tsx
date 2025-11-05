@@ -132,7 +132,7 @@ export default function BookCarousel({ products }: CarouselProps) {
 						</h2>
 
 						{/* Description */}
-						<p className='text-xs lg:text-base text-gray-600 leading-relaxed font-medium line-clamp-2 lg:line-clamp-3 mb-3 lg:mb-6'>
+						<p className='text-xs lg:text-base text-gray-600 leading-relaxed font-medium line-clamp-2 lg:line-clamp-3 mb-3 lg:mb-6 whitespace-pre-line'>
 							{currentBook.description}
 						</p>
 

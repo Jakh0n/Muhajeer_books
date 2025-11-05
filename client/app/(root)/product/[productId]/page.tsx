@@ -11,6 +11,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BuyButton from './_components/buy-button'
+import ProductDescription from './_components/product-description'
 interface ProductPageProps {
 	params: Params
 }
@@ -79,9 +80,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 						<ShareBtn />
 					</div>
 
-					<p className='text-sm md:text-base text-muted-foreground leading-relaxed'>
-						{product.description}
-					</p>
+					<ProductDescription description={product.description} maxLines={4} />
 
 					<div className='flex flex-col gap-2 bg-muted/50 p-4 rounded-lg'>
 						<div className='flex items-center gap-2'>
