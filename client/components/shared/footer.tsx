@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Linkedin } from 'lucide-react'
 import Link from 'next/link'
 
 const Footer = () => {
@@ -8,22 +8,12 @@ const Footer = () => {
 				<div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
 					{/* Branding */}
 					<div className='space-y-2'>
-						<h3 className='text-lg font-bold'>FLAMI</h3>
+						<h3 className='text-lg font-bold'>Muhajeer Books</h3>
 						<p className='text-sm leading-6 text-muted-foreground max-w-xs'>
-							Koreyada yashovchi o'zbeklar uchun{' '}
-							<span className='font-bold text-green-500'>eng arzon</span> va
-							<span className='font-bold text-green-500'> eng yangi</span>{' '}
-							kitoblarni taklif qilamiz. O'zbek, rus va ingliz tilidagi
-							kitoblarni online buyurtma qiling.
+							O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma
+							qiling va yetkazib berishni taklif qilamiz.
 						</p>
-						<div className='flex items-center space-x-2 pt-2'>
-							<Link
-								href='https://github.com/jahongirdev'
-								target='_blank'
-								className='hover:text-primary transition-colors p-1.5 hover:bg-muted rounded-full'
-							>
-								<Github className='h-4 w-4' />
-							</Link>
+						{/* <div className='flex items-center space-x-2 pt-2'>
 							<Link
 								href='https://linkedin.com'
 								target='_blank'
@@ -38,7 +28,7 @@ const Footer = () => {
 							>
 								<Twitter className='h-4 w-4' />
 							</Link>
-						</div>
+						</div> */}
 					</div>
 
 					{/* Quick Links */}
@@ -86,10 +76,10 @@ const Footer = () => {
 							</li>
 							<li>
 								<a
-									href='mailto:info@flami.org'
+									href='mailto:muhajeerbooks@gmail.com'
 									className='hover:text-primary transition-colors'
 								>
-									info@flami.org
+									muhajeerbooks@gmail.com
 								</a>
 							</li>
 							<li className='max-w-xs'>Janubiy Korea, Seoul</li>
@@ -100,7 +90,8 @@ const Footer = () => {
 				{/* Bottom Bar */}
 				<div className='mt-8 pt-4 border-t flex flex-col md:flex-row justify-between items-center gap-2 text-sm text-muted-foreground'>
 					<div className='text-center md:text-left'>
-						© {new Date().getFullYear()} FLAMI. Barcha huquqlar himoyalangan
+						© {new Date().getFullYear()} Muhajeer Books. Barcha huquqlar
+						himoyalangan
 					</div>
 					<div className='flex items-center gap-1'>
 						<Link

@@ -14,12 +14,15 @@ function Logo() {
 	return (
 		<Link href={'/'} className='flex items-center gap-2'>
 			<Image
-				src={'/logo_flami.svg'}
+				src={'/muhajeer_logo.jpg'}
 				alt='logo'
-				width={150}
-				height={150}
-				className={isDark ? 'dark:invert' : ''}
+				width={50}
+				height={50}
+				className='rounded-full object-cover'
 			/>
+			<span className='text-xl hidden font-montserrat md:block font-bold'>
+				Muhajeer Books
+			</span>
 		</Link>
 	)
 }
