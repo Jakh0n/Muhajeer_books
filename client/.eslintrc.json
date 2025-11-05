@@ -1,0 +1,20 @@
+{
+	"extends": [
+		"next/core-web-vitals",
+		"next/typescript",
+		"standard",
+		"plugin:tailwindcss/recommended",
+		"prettier"
+	],
+	"rules": {
+		"tailwindcss/classnames-order": "off",
+		"tailwindcss/enforces-shorthand": "off",
+		"tailwindcss/migration-from-tailwind-2": "off",
+		"tailwindcss/no-custom-classname": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"no-unused-vars": "off",
+		"no-undef": "off",
+		"react-hooks/exhaustive-deps": "off",
+		"react/no-unescaped-entities": "off"
+	}
+}
