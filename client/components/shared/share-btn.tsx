@@ -26,6 +26,15 @@ interface ShareBtnProps {
 }
 
 const ShareBtn = ({ productId }: ShareBtnProps) => {
+	const getShareUrl = () => {
+		if (typeof window !== 'undefined') {
+			return `${window.location.origin}/product/${productId}`
+		}
+		return `${process.env.NEXT_PUBLIC_DOMAIN_URL || ''}/product/${productId}`
+	}
+
+	const shareUrl = getShareUrl()
+
 	return (
 		<div>
 			<Dialog>
@@ -42,29 +51,19 @@ const ShareBtn = ({ productId }: ShareBtnProps) => {
 						</DialogTitle>
 					</DialogHeader>
 					<div className='flex items-center space-x-2 justify-center'>
-						<TelegramShareButton
-							url={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/product/${productId}`}
-						>
+						<TelegramShareButton url={shareUrl}>
 							<TelegramIcon className='rounded-full size-10' />
 						</TelegramShareButton>
-						<WhatsappShareButton
-							url={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/product/${productId}`}
-						>
+						<WhatsappShareButton url={shareUrl}>
 							<WhatsappIcon className='rounded-full size-10' />
 						</WhatsappShareButton>
-						<FacebookShareButton
-							url={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/product/${productId}`}
-						>
+						<FacebookShareButton url={shareUrl}>
 							<FacebookIcon className='rounded-full size-10' />
 						</FacebookShareButton>
-						<TwitterShareButton
-							url={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/product/${productId}`}
-						>
+						<TwitterShareButton url={shareUrl}>
 							<TwitterIcon className='rounded-full size-10' />
 						</TwitterShareButton>
-						<EmailShareButton
-							url={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/product/${productId}`}
-						>
+						<EmailShareButton url={shareUrl}>
 							<EmailIcon className='rounded-full size-10' />
 						</EmailShareButton>
 					</div>

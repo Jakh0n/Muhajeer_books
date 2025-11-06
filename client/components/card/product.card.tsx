@@ -1,5 +1,6 @@
 'use client'
 import { addFavorite } from '@/actions/user.action'
+import NoSSR from '@/components/shared/no-ssr'
 import useAction from '@/hooks/use-action'
 import { toast } from '@/hooks/use-toast'
 import { cn, formatPrice } from '@/lib/utils'
@@ -8,7 +9,6 @@ import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useState } from 'react'
-import NoSSR from 'react-no-ssr'
 import { Button } from '../ui/button'
 import {
 	Tooltip,

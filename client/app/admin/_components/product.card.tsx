@@ -1,6 +1,7 @@
 'use client'
 
 import { deleteProduct } from '@/actions/admin.action'
+import NoSSR from '@/components/shared/no-ssr'
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -22,7 +23,6 @@ import { formatPrice } from '@/lib/utils'
 import { IProduct } from '@/types'
 import Image from 'next/image'
 import { FC } from 'react'
-import NoSSR from 'react-no-ssr'
 
 interface Props {
 	product: IProduct

@@ -1,15 +1,15 @@
 'use client'
 
+import { deleteFavorite } from '@/actions/user.action'
+import NoSSR from '@/components/shared/no-ssr'
+import UseAction from '@/hooks/use-action'
+import { toast } from '@/hooks/use-toast'
+import { formatPrice } from '@/lib/utils'
 import { IProduct } from '@/types'
+import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import { FC } from 'react'
 import { Button } from '../ui/button'
-import { Heart } from 'lucide-react'
-import NoSSR from 'react-no-ssr'
-import { formatPrice } from '@/lib/utils'
-import { deleteFavorite } from '@/actions/user.action'
-import UseAction from '@/hooks/use-action'
-import { toast } from '@/hooks/use-toast'
 
 interface Props {
 	product: Partial<IProduct>

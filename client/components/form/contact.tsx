@@ -33,42 +33,47 @@ function ContactForm() {
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof contactSchema>) {
+	async function onSubmit(values: z.infer<typeof contactSchema>) {
 		setIsLoading(true)
-		const telegramBotId = process.env.NEXT_PUBLIC_TETELGRAM_BOT_API!
-		const telegramChatId = process.env.NEXT_PUBLIC_TETELGRAM_CHAT_ID!
 
-		fetch(`https://api.telegram.org/bot${telegramBotId}/sendMessage`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'cache-control': 'no-cache',
-			},
-			body: JSON.stringify({
-				chat_id: telegramChatId,
-				text: `📚 Yangi Buyurtma!
+		try {
+			const response = await fetch('/api/telegram', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name: values.name,
+					phone: values.phone,
+					address: values.address,
+					bookTitle: values.bookTitle,
+					message: values.message,
+				}),
+			})
 
-👤 Mijoz: ${values.name}
-📱 Telefon: ${values.phone}
-📍 Manzil: ${values.address}
-📖 Kitob: ${values.bookTitle}
-💬 Qo'shimcha: ${values.message || "Yo'q"}`,
-			}),
-		})
-			.then(() => {
-				form.reset()
-				toast({
-					description:
-						"Buyurtmangiz muvaffaqiyatli yuborildi! Siz bilan tez orada bog'lanishadi",
-				})
+			const data = await response.json()
+
+			if (!response.ok || !data.success) {
+				throw new Error(data.error || 'Failed to send message')
+			}
+
+			form.reset()
+			toast({
+				description:
+					"Buyurtmangiz muvaffaqiyatli yuborildi! Siz bilan tez orada bog'lanishadi",
 			})
-			.catch(() => {
-				toast({
-					description: "Xatolik yuz berdi! Qayta urinib ko'ring.",
-					variant: 'destructive',
-				})
+		} catch (error) {
+			console.error('Failed to send message to Telegram:', error)
+			toast({
+				description:
+					error instanceof Error
+						? `Xatolik: ${error.message}`
+						: "Xatolik yuz berdi! Qayta urinib ko'ring.",
+				variant: 'destructive',
 			})
-			.finally(() => setIsLoading(false))
+		} finally {
+			setIsLoading(false)
+		}
 	}
 
 	return (
