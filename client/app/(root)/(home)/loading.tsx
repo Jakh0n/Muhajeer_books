@@ -9,12 +9,12 @@ export default function Loading() {
 					<div className='container relative z-10 grid grid-cols-2'>
 						<div className='col-span-1 flex flex-col justify-center space-y-4'>
 							<div className='space-y-2'>
-								<Skeleton className='h-12 w-[80%]' />
+								<Skeleton className='h-12 w-4/5' />
 							</div>
 							<div className='space-y-2'>
 								<Skeleton className='h-4 w-[90%]' />
 								<Skeleton className='h-4 w-[85%]' />
-								<Skeleton className='h-4 w-[80%]' />
+								<Skeleton className='h-4 w-4/5' />
 							</div>
 							<div className='flex space-x-3'>
 								<Skeleton className='h-10 w-24' />
@@ -35,7 +35,7 @@ export default function Loading() {
 					<Skeleton className='h-10 w-[200px]' />
 				</div>
 
-				<Skeleton className='h-[1px] w-full my-4' />
+				<Skeleton className='h-px w-full my-4' />
 
 				{/* Grid layout for books */}
 				<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4'>
@@ -55,13 +55,13 @@ export default function Loading() {
 								<div className='flex flex-col justify-between flex-1 mt-2'>
 									{/* Title and description */}
 									<div className='space-y-1.5'>
-										<Skeleton className='h-3.5 w-[80%]' />
-										<Skeleton className='h-3.5 w-[60%]' />
+										<Skeleton className='h-3.5 w-4/5' />
+										<Skeleton className='h-3.5 w-3/5' />
 									</div>
 
 									<div className='space-y-1.5'>
 										{/* Author name */}
-										<Skeleton className='h-3 w-[40%]' />
+										<Skeleton className='h-3 w-2/5' />
 
 										{/* Rating */}
 										<div className='flex items-center gap-1.5'>

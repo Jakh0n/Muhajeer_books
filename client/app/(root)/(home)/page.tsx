@@ -33,7 +33,7 @@ const Page = async ({ searchParams }: Props) => {
 			<div className=' w-full flex items-center   mt-10 '>
 				<h1 className='font-bold mr-4'>Kitoblar</h1>
 
-				<Filter />
+				<Filter showCategory />
 			</div>
 
 			<Separator className='my-4' />

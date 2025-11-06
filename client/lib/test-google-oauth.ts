@@ -90,9 +90,12 @@ export function testGoogleOAuthConfig() {
 	if (results.serverUrl.exists) {
 		const url = process.env.NEXT_PUBLIC_SERVER_URL!
 		try {
-			new URL(url)
-			results.serverUrl.isValid = true
-			results.serverUrl.message = '✅ Valid server URL format'
+			// eslint-disable-next-line no-new
+			const urlObj = new URL(url)
+			if (urlObj) {
+				results.serverUrl.isValid = true
+				results.serverUrl.message = '✅ Valid server URL format'
+			}
 		} catch {
 			results.serverUrl.isValid = false
 			results.serverUrl.message = '❌ Invalid URL format'

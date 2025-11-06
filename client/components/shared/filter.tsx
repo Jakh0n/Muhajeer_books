@@ -63,7 +63,7 @@ const Filter = ({ showCategory }: Props) => {
 	return (
 		<div
 			className={cn(
-				' gap-1 w-full flex items-center justify-end',
+				' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 ',
 				showCategory ? 'grid-cols-3' : 'grid-cols-2'
 			)}
 		>

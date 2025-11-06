@@ -71,8 +71,12 @@ export const authOptions: NextAuthOptions = {
 					try {
 						await axios.get(serverUrl, { timeout: 3000 })
 						console.log('✅ Server is reachable')
-					} catch (serverCheckError: any) {
-						if (serverCheckError.code === 'ECONNREFUSED') {
+					} catch (serverCheckError: unknown) {
+						const error = serverCheckError as {
+							code?: string
+							message?: string
+						}
+						if (error.code === 'ECONNREFUSED') {
 							console.error(
 								'❌ Server is not running! Please start your Express server.'
 							)
@@ -81,7 +85,10 @@ export const authOptions: NextAuthOptions = {
 							)
 						}
 						// Server might be running but returned an error, continue anyway
-						console.log('⚠️ Server check returned:', serverCheckError.message)
+						console.log(
+							'⚠️ Server check returned:',
+							error.message || 'Unknown error'
+						)
 					}
 
 					const serverAxios = axios.create({
@@ -92,7 +99,8 @@ export const authOptions: NextAuthOptions = {
 
 					const payload = {
 						email: user.email,
-						fullName: user.name || (profile as any)?.name || 'User',
+						fullName:
+							user.name || (profile as { name?: string })?.name || 'User',
 						googleId: account.providerAccountId,
 						avatar: user.image,
 					}
@@ -129,26 +137,32 @@ export const authOptions: NextAuthOptions = {
 					}
 
 					return false
-				} catch (error: any) {
+				} catch (error: unknown) {
+					const axiosError = error as {
+						message?: string
+						code?: string
+						response?: { data?: unknown; status?: number }
+						config?: { url?: string; baseURL?: string }
+					}
 					console.error('❌ Google OAuth error:', {
-						message: error?.message,
-						code: error?.code,
-						response: error?.response?.data,
-						status: error?.response?.status,
-						url: error?.config?.url,
-						baseURL: error?.config?.baseURL,
+						message: axiosError?.message,
+						code: axiosError?.code,
+						response: axiosError?.response?.data,
+						status: axiosError?.response?.status,
+						url: axiosError?.config?.url,
+						baseURL: axiosError?.config?.baseURL,
 					})
 
 					// More specific error handling
-					if (error?.code === 'ECONNREFUSED') {
+					if (axiosError?.code === 'ECONNREFUSED') {
 						console.error(
 							'❌ Cannot connect to server. Is your Express server running?'
 						)
-					} else if (error?.response?.status === 404) {
+					} else if (axiosError?.response?.status === 404) {
 						console.error(
 							'❌ Server endpoint not found. Check if /api/auth/google route exists.'
 						)
-					} else if (error?.response?.status === 500) {
+					} else if (axiosError?.response?.status === 500) {
 						console.error('❌ Server error. Check server logs.')
 					}
 
@@ -181,11 +195,16 @@ export const authOptions: NextAuthOptions = {
 					} else {
 						console.error('❌ No user data in profile response')
 					}
-				} catch (error: any) {
+				} catch (error: unknown) {
+					const axiosError = error as {
+						message?: string
+						response?: { status?: number }
+						config?: { url?: string }
+					}
 					console.error('❌ Session error:', {
-						message: error?.message,
-						status: error?.response?.status,
-						url: error?.config?.url,
+						message: axiosError?.message,
+						status: axiosError?.response?.status,
+						url: axiosError?.config?.url,
 					})
 				}
 			} else {

@@ -7,8 +7,26 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000'
  * Test if the server endpoint is accessible
  * Visit: http://localhost:3000/api/test-auth-connection
  */
+interface TestResult {
+	name: string
+	status: 'success' | 'error' | 'warning'
+	message: string
+}
+
+interface TestResults {
+	serverUrl: string
+	googleEndpoint: string
+	environmentVariables: {
+		GOOGLE_CLIENT_ID: boolean
+		GOOGLE_CLIENT_SECRET: boolean
+		NEXT_AUTH_SECRET: boolean
+		NEXT_PUBLIC_SERVER_URL: boolean
+	}
+	tests: TestResult[]
+}
+
 export async function GET() {
-	const results: any = {
+	const results: TestResults = {
 		serverUrl: SERVER_URL,
 		googleEndpoint: `${SERVER_URL}/api/auth/google`,
 		environmentVariables: {
@@ -28,8 +46,13 @@ export async function GET() {
 			status: 'success',
 			message: `Server is running on ${SERVER_URL}`,
 		})
-	} catch (error: any) {
-		if (error.code === 'ECONNREFUSED') {
+	} catch (error: unknown) {
+		const axiosError = error as {
+			code?: string
+			response?: { status?: number }
+			message?: string
+		}
+		if (axiosError.code === 'ECONNREFUSED') {
 			results.tests.push({
 				name: 'Server Reachable',
 				status: 'error',
@@ -39,7 +62,9 @@ export async function GET() {
 			results.tests.push({
 				name: 'Server Reachable',
 				status: 'warning',
-				message: `Got response: ${error.response?.status || error.message}`,
+				message: `Got response: ${
+					axiosError.response?.status || axiosError.message || 'Unknown error'
+				}`,
 			})
 		}
 	}
@@ -72,8 +97,9 @@ export async function GET() {
 				message: `Endpoint returned status ${response.status}`,
 			})
 		}
-	} catch (error: any) {
-		if (error.code === 'ECONNREFUSED') {
+	} catch (error: unknown) {
+		const axiosError = error as { code?: string; message?: string }
+		if (axiosError.code === 'ECONNREFUSED') {
 			results.tests.push({
 				name: 'Google Auth Endpoint',
 				status: 'error',
@@ -83,15 +109,17 @@ export async function GET() {
 			results.tests.push({
 				name: 'Google Auth Endpoint',
 				status: 'error',
-				message: error.message,
+				message: axiosError.message || 'Unknown error',
 			})
 		}
 	}
 
 	const allPassed = results.tests.every(
-		(test: any) => test.status === 'success'
+		(test: TestResult) => test.status === 'success'
 	)
-	const hasErrors = results.tests.some((test: any) => test.status === 'error')
+	const hasErrors = results.tests.some(
+		(test: TestResult) => test.status === 'error'
+	)
 
 	return NextResponse.json(
 		{

@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function AuthErrorPage() {
+function AuthErrorContent() {
 	const searchParams = useSearchParams()
 	const error = searchParams.get('error')
 
@@ -24,36 +25,68 @@ export default function AuthErrorPage() {
 		error && errorMessages[error] ? errorMessages[error] : errorMessages.Default
 
 	return (
-		<div className='flex justify-center items-center min-h-screen p-4'>
-			<Card className='w-full max-w-md p-6 shadow-lg'>
-				<div className='space-y-4 text-center'>
-					<h1 className='text-2xl font-bold text-destructive'>
-						Authentication Error
-					</h1>
-					<p className='text-sm text-muted-foreground'>{errorMessage}</p>
+		<Card className='w-full max-w-md p-6 shadow-lg'>
+			<div className='space-y-4 text-center'>
+				<h1 className='text-2xl font-bold text-destructive'>
+					Authentication Error
+				</h1>
+				<p className='text-sm text-muted-foreground'>{errorMessage}</p>
 
-					{error === 'AccessDenied' && (
-						<div className='rounded-lg bg-muted p-4 text-left text-sm'>
-							<p className='font-semibold mb-2'>💡 Troubleshooting steps:</p>
-							<ol className='list-decimal list-inside space-y-1 text-muted-foreground'>
-								<li>Make sure your Express server is running</li>
-								<li>Check that NEXT_PUBLIC_SERVER_URL is set correctly</li>
-								<li>Verify your server console for error messages</li>
-								<li>Check the browser console for detailed logs</li>
-							</ol>
-						</div>
-					)}
-
-					<div className='flex flex-col gap-2 pt-4'>
-						<Button asChild>
-							<Link href='/sign-in'>Try Again</Link>
-						</Button>
-						<Button asChild variant='outline'>
-							<Link href='/sign-up'>Sign Up Instead</Link>
-						</Button>
+				{error === 'AccessDenied' && (
+					<div className='rounded-lg bg-muted p-4 text-left text-sm'>
+						<p className='font-semibold mb-2'>💡 Troubleshooting steps:</p>
+						<ol className='list-decimal list-inside space-y-1 text-muted-foreground'>
+							<li>Make sure your Express server is running</li>
+							<li>Check that NEXT_PUBLIC_SERVER_URL is set correctly</li>
+							<li>Verify your server console for error messages</li>
+							<li>Check the browser console for detailed logs</li>
+						</ol>
 					</div>
+				)}
+
+				<div className='flex flex-col gap-2 pt-4'>
+					<Button asChild>
+						<Link href='/sign-in'>Try Again</Link>
+					</Button>
+					<Button asChild variant='outline'>
+						<Link href='/sign-up'>Sign Up Instead</Link>
+					</Button>
 				</div>
-			</Card>
+			</div>
+		</Card>
+	)
+}
+
+function ErrorFallback() {
+	return (
+		<Card className='w-full max-w-md p-6 shadow-lg'>
+			<div className='space-y-4 text-center'>
+				<h1 className='text-2xl font-bold text-destructive'>
+					Authentication Error
+				</h1>
+				<p className='text-sm text-muted-foreground'>
+					An error occurred during authentication. Please try again or use
+					email/password to sign in.
+				</p>
+				<div className='flex flex-col gap-2 pt-4'>
+					<Button asChild>
+						<Link href='/sign-in'>Try Again</Link>
+					</Button>
+					<Button asChild variant='outline'>
+						<Link href='/sign-up'>Sign Up Instead</Link>
+					</Button>
+				</div>
+			</div>
+		</Card>
+	)
+}
+
+export default function AuthErrorPage() {
+	return (
+		<div className='flex justify-center items-center min-h-screen p-4'>
+			<Suspense fallback={<ErrorFallback />}>
+				<AuthErrorContent />
+			</Suspense>
 		</div>
 	)
 }
