@@ -77,7 +77,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 						<Badge className='w-fit text-sm md:text-base' variant={'secondary'}>
 							# {product.category}
 						</Badge>
-						<ShareBtn />
+						<ShareBtn productId={productId} />
 					</div>
 
 					<ProductDescription description={product.description} maxLines={4} />

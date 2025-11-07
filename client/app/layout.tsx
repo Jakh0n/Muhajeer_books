@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://muhajeerbooks.com/'),
+	metadataBase: new URL('https://muhajeerbooks.vercel.app'),
 	title: "Muhajeer Books | O'zbek, rus va ingliz tillaridagi kitoblar do'koni",
 	description:
 		"O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling va yetkazib berishni taklif qilamiz.",
@@ -25,12 +25,27 @@ export const metadata: Metadata = {
 		description:
 			"O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling va yetkazib berishni taklif qilamiz.",
 		type: 'website',
-		url: 'https://muhajeerbooks.com',
+		url: 'https://muhajeerbooks.vercel.app',
 		locale: 'kr-KR',
-		images: '/muhajeer_logo.jpg',
+		images: [
+			{
+				url: 'https://muhajeerbooks.vercel.app/muhajeer_logo.jpg',
+				width: 1200,
+				height: 630,
+				alt: 'Muhajeer Books Logo',
+			},
+		],
 		countryName: 'Korea',
 		siteName: 'Muhajeer Books',
 		emails: 'muhajeerbooks@gmail.com',
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title:
+			"Muhajeer Books | O'zbek, rus va ingliz tillaridagi kitoblar do'koni",
+		description:
+			"O'zbek, rus va ingliz tillaridagi kitoblarni online buyurtma qiling va yetkazib berishni taklif qilamiz.",
+		images: ['https://muhajeerbooks.vercel.app/muhajeer_logo.jpg'],
 	},
 	keywords: [
 		'kitob dukoni Koreyada',

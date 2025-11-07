@@ -27,10 +27,22 @@ interface ShareBtnProps {
 
 const ShareBtn = ({ productId }: ShareBtnProps) => {
 	const getShareUrl = () => {
+		if (!productId) {
+			// Fallback to home page if no productId
+			if (typeof window !== 'undefined') {
+				return window.location.origin
+			}
+			return (
+				process.env.NEXT_PUBLIC_DOMAIN_URL || 'https://muhajeerbooks.vercel.app'
+			)
+		}
+
 		if (typeof window !== 'undefined') {
 			return `${window.location.origin}/product/${productId}`
 		}
-		return `${process.env.NEXT_PUBLIC_DOMAIN_URL || ''}/product/${productId}`
+		return `${
+			process.env.NEXT_PUBLIC_DOMAIN_URL || 'https://muhajeerbooks.vercel.app'
+		}/product/${productId}`
 	}
 
 	const shareUrl = getShareUrl()
